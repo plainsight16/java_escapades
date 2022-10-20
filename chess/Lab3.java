@@ -211,22 +211,27 @@ public class Lab3 {
         //Move Piece
         String[] pieceArray = board[row][col].split("");
         String piece = pieceArray[3];
-        pieceArray[3] = " ";
-        board[row][col] = "";
-
-        for (String p : pieceArray){
-            board[row][col] += p;
+        
+        if (piece.equals(" ")){
+            System.out.println("You have selected a blank piece, try again");
         }
+        else{
+            pieceArray[3] = " ";
+            board[row][col] = "";
 
-        String[] targetPieceArray = board[targetedRow][targetedColumn].split("");
-        targetPieceArray[3] = piece;
-        System.out.println();
-        board[targetedRow][targetedColumn] = "";
+            for (String p : pieceArray){
+                board[row][col] += p;
+            }
 
-        for (String targetPiece : targetPieceArray){
-            board[targetedRow][targetedColumn] += targetPiece;
+            String[] targetPieceArray = board[targetedRow][targetedColumn].split("");
+            targetPieceArray[3] = piece;
+            System.out.println();
+            board[targetedRow][targetedColumn] = "";
+
+            for (String targetPiece : targetPieceArray){
+                board[targetedRow][targetedColumn] += targetPiece;
+            }
         }
-
     }
 
     // helper function to movePiece
