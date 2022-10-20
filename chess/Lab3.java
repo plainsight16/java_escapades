@@ -121,15 +121,12 @@ public class Lab3 {
     }
 
     public static void checkValidMoves(){
-        System.out.print("Enter row number: ");
-        int row = input.nextInt();
-
-        System.out.print("Enter column number: ");
-        int column = input.nextInt();
+        int row = 0, column = 0;
+        row = validateValue(row, true);
+        column = validateValue(column, false);
 
         String piece = board[offsetRow(row)][column];
         piece = convertPiece(piece);
-
 
         switch (piece) {
             case "p" -> {
@@ -198,11 +195,7 @@ public class Lab3 {
 
         int row = 0, col = 0;
 
-        System.out.print("Enter the row number: ");
-
         row = offsetRow(validateValue(row, true)); // Offset Value
-
-        System.out.print("Enter the column number: ");
 
         col = validateValue(col, false);
 
@@ -211,11 +204,7 @@ public class Lab3 {
 
         int targetedRow = 0, targetedColumn = 0;
 
-        System.out.print("Enter the row number: ");
-
         targetedRow = offsetRow(validateValue(targetedRow, true)); // Offset Value
-
-        System.out.print("Enter the column number: ");
 
         targetedColumn = validateValue(targetedColumn, false);
 
@@ -245,14 +234,22 @@ public class Lab3 {
         boolean isInvalid = true;
 
         while (isInvalid){
-            value = input.nextInt();
+            System.out.printf("Enter the %s number: ", isRow ? "row" : "column");
+            String userValue = input.next();
 
-            if (value < 1 || value > 8){
-                System.out.printf("Valid %s numbers are from 1 - 8", isRow ? "row" : "column");
+            try{
+                value = Integer.parseInt(userValue);
+                if (value < 1 || value > 8){
+                    System.out.printf("Valid %s numbers are from 1 - 8", isRow ? "row" : "column");
+                }
+                else {
+                    isInvalid = false;
+                }
+
+            }catch(NumberFormatException ex){
+                System.out.println("Input must be integer valid from 1 - 8, try again");
             }
-            else {
-                isInvalid = false;
-            }
+
         }
         return value;
     }
